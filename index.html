@@ -133,7 +133,7 @@
     .concept-map-container {
       flex-grow: 1;
       width: 100%;
-      height: 200vh; /* Área más larga hacia abajo */
+      height: 200vh;
       overflow: auto;
       border: 2px solid #FFD700;
       border-radius: 15px;
@@ -143,7 +143,7 @@
     
     .concept-map {
       position: relative;
-      min-height: 1500px; /* Altura aumentada */
+      min-height: 1500px;
       min-width: 100%;
       padding: 20px;
       background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.01) 90%);
@@ -202,10 +202,10 @@
       background-color: #FFD700;
       color: #121212;
       font-weight: bold;
-      font-size: clamp(0.9rem, 3vw, 1.1rem); /* Tamaño más pequeño */
-      max-width: 180px; /* Ancho reducido */
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      max-width: 180px;
       z-index: 20;
-      padding: 10px 15px; /* Padding reducido */
+      padding: 10px 15px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
@@ -297,7 +297,6 @@
       color: #121212;
     }
     
-    /* Estilos para impresión */
     @media print {
       body {
         background-color: white !important;
@@ -351,7 +350,6 @@
         color: black !important;
       }
       
-      /* Organización para impresión */
       .category-group {
         display: block !important;
         margin-bottom: 30px !important;
@@ -370,7 +368,6 @@
       }
     }
 
-    /* Footer styles */
     footer {
       background-color: #000;
       color: #ccc;
@@ -435,22 +432,19 @@
 </head>
 <body>
    
-  <div class="language-selector">
-    <button class="language-btn active" onclick="changeLanguage('es')">Es</button>
-    <button class="language-btn" onclick="changeLanguage('en')">En</button>
-    <button class="language-btn" onclick="changeLanguage('fr')">Fr</button>
-  </div>
-   <h1 id="main-title">Mapa Conceptual Interactivo</h1>
+
+   
+  <h1 id="main-title">Mapa de Riesgos </h1>
   
   <div style="text-align: center; margin-top: -1px; margin-bottom: 30px;">
-      <img src="https://i.postimg.cc/wxbXr1cN/786cba55-7b54-4556-a8eb-63ddfc85dfdb.jpg"
+      <img src="https://i.postimg.cc/gjRT1Czc/b175c5eb-04e0-44c3-bfcb-fd977ee639bc.jpg"
            alt="Imagen decorativa"
            style="max-width: 150px; border: 3px solid gold; border-radius: 10px; box-shadow: 0 0 15px gold;">
-    </div>
+  </div>
   
   <div class="age-selector">
-    <button class="age-btn active" onclick="showAgeSection('children')" id="btn-children">👧🧒 Niños</button>
-    <button class="age-btn" onclick="showAgeSection('teens')" id="btn-teens">👨‍🎓👩‍🎓Jóvenes</button>
+    <button class="age-btn active" data-age="children" id="btn-children">👧🧒 Niños</button>
+    <button class="age-btn" data-age="teens" id="btn-teens">👨‍🎓👩‍🎓Jóvenes</button>
   </div>
   
   <!-- Sección para Niños -->
@@ -479,9 +473,9 @@
     </div>
     
     <div class="controls">
-      <button class="control-btn" onclick="resetCurrentMap()" id="children-reset-btn">🔄 Reiniciar Mapa</button>
-      <button class="control-btn" onclick="checkCurrentMap()" id="children-check-btn">✅ Verificar Mapa</button>
-      <button class="control-btn print" onclick="printMap()" id="print-btn">🖨️ Imprimir Mapa</button>
+      <button class="control-btn" id="children-reset-btn">🔄 Reiniciar Mapa</button>
+      <button class="control-btn" id="children-check-btn">✅ Verificar Mapa</button>
+      <button class="control-btn print" id="print-btn">🖨️ Imprimir Mapa</button>
     </div>
   </div>
   
@@ -512,53 +506,55 @@
     </div>
     
     <div class="controls">
-      <button class="control-btn" onclick="resetCurrentMap()" id="teens-reset-btn">Reiniciar Mapa</button>
-      <button class="control-btn" onclick="checkCurrentMap()" id="teens-check-btn">Verificar Mapa</button>
-      <button class="control-btn print" onclick="printMap()" id="print-btn">Imprimir Mapa</button>
+      <button class="control-btn" id="teens-reset-btn">Reiniciar Mapa</button>
+      <button class="control-btn" id="teens-check-btn">Verificar Mapa</button>
+      <button class="control-btn print" id="print-btn-teens">Imprimir Mapa</button>
     </div>
   </div>
 
   <div class="zoom-controls">
-    <button class="zoom-btn" onclick="zoomIn()">+</button>
-    <button class="zoom-btn" onclick="zoomOut()">-</button>
-    <button class="zoom-btn" onclick="resetZoom()">↻</button>
+    <button class="zoom-btn" id="zoom-in-btn">+</button>
+    <button class="zoom-btn" id="zoom-out-btn">-</button>
+    <button class="zoom-btn" id="reset-zoom-btn">↻</button>
   </div>
 
-  <footer>
-    © 2024-2025 — Herramientas del Proyecto de Investigación: <strong>*Emociones en el Aula*</strong><br>
-    Propuesta educativa y cultural creada por <strong>Yobana Orozco Benavides</strong>, Escritora | Docente | Gestora de proyectos artísticos y pedagógicos<br><br>
-    
-    Licencia: 
-    <em>Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)</em>
-    <span class="cc-logo">
-      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC Logo">
-      </a>
-    </span>
-    <br>
-    Uso libre con fines educativos — <strong>prohibido uso comercial</strong><br><br>
+  <footer id="site-footer">
+    <div id="footer-content">
+      <div id="copyright">© 2024-2025 — Herramientas del Proyecto de Investigación: <strong>*Emociones en el Aula*</strong></div>
+      <div id="author-info">Propuesta educativa y cultural creada por <strong>Yobana Orozco Benavides</strong>, Escritora | Docente | Gestora de proyectos artísticos y pedagógicos</div>
+      <div id="license-info">
+        Licencia: 
+        <em>Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)</em>
+        <span class="cc-logo">
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">
+            <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC Logo">
+          </a>
+        </span>
+      </div>
+      <div id="license-terms">Uso libre con fines educativos — <strong>prohibido uso comercial</strong></div>
+      <div id="more-info">Más información de la autora: 
+        <a href="https://yobanaorozcoartista.bio.link/" target="_blank" rel="noopener">yobanaorozcoartista.bio.link</a>
+      </div>
 
-    Más información de la autora: 
-    <a href="https://yobanaorozcoartista.bio.link/" target="_blank" rel="noopener">yobanaorozcoartista.bio.link</a>
-
-    <div class="enlaces-footer">
-      <a href="https://orcid.org/0009-0002-9253-6429" target="_blank">ORCID</a>
-      <a href="https://www.webofscience.com/wos/?mode=Nextgen&path=%2Fwos%2Fauthor%2Frecord%2FLLM-9647-2024&IsProductCode=Yes&Init=Yes&DestApp=UA&Func=Frame&action=transfer&SrcApp=CR&SID=USW2EC0AFFb0eJYIUmqxKCgZWIVbn" target="_blank">Web of Science</a>
-      <a href="https://account.ncbi.nlm.nih.gov/?back_url=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fmyncbi%2F" target="_blank">NCBI</a>
-      <a href="https://es.slideshare.net/YOBANAOROZCO" target="_blank">SlideShare</a>
-      <a href="https://hq.ssrn.com/login/authentication.cfm?rectype=edit&perinf=y&partid=7786766" target="_blank">SSRN</a>
-      <a href="https://www.researchgate.net/" target="_blank">ResearchGate</a>
-      <a href="https://siise.bibliotecanacional.gov.co/siise/Login?ReturnUrl=%2fsiise%2fSeleccionAdquisiciones%2fSolicitudISSN%2fIndex" target="_blank">SIISE</a>
-      <a href="https://scientificrc.org/index.php/src/login?source=%2Findex.php%2Fsrc%2Fsubmission%2Fwizard" target="_blank">Scientific RC</a>
-      <a href="https://www.openaire.eu/annual-reports" target="_blank">OpenAIRE</a>
-      <a href="https://zenodo.org/" target="_blank">Zenodo</a>
-      <a href="https://sso.anii.org.uy/oxauth/login.htm" target="_blank">ANII</a>
-      <a href="https://rizoma.conahcyt.mx/acerca-de-mi/mi-perfil" target="_blank">Rizoma CONAHCYT</a>
-      <a href="https://papersubmission.scirp.org/paper/showAddPaper" target="_blank">SCIRP Submission</a>
-      <a href="https://utolima.academia.edu/YOBANAOROZCOBENAVIDES" target="_blank">Academia.edu</a>
-      <a href="https://www.studocu.com/co/user/yobana-orozco-benavides/15382735?origin=user-menu" target="_blank">Studocu</a>
-      <a href="https://www.calameo.com/accounts/7997056" target="_blank">Calameo</a>
-      <a href="https://www.amazon.com.mx/stores/YOBANA-OROZCO-BENAVIDES/author/B0CZG5RS1T?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true" target="_blank">Amazon</a>
+      <div class="enlaces-footer" id="footer-links">
+        <a href="https://orcid.org/0009-0002-9253-6429" target="_blank">ORCID</a>
+        <a href="https://www.webofscience.com/wos/?mode=Nextgen&path=%2Fwos%2Fauthor%2Frecord%2FLLM-9647-2024&IsProductCode=Yes&Init=Yes&DestApp=UA&Func=Frame&action=transfer&SrcApp=CR&SID=USW2EC0AFFb0eJYIUmqxKCgZWIVbn" target="_blank">Web of Science</a>
+        <a href="https://account.ncbi.nlm.nih.gov/?back_url=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fmyncbi%2F" target="_blank">NCBI</a>
+        <a href="https://es.slideshare.net/YOBANAOROZCO" target="_blank">SlideShare</a>
+        <a href="https://hq.ssrn.com/login/authentication.cfm?rectype=edit&perinf=y&partid=7786766" target="_blank">SSRN</a>
+        <a href="https://www.researchgate.net/" target="_blank">ResearchGate</a>
+        <a href="https://siise.bibliotecanacional.gov.co/siise/Login?ReturnUrl=%2fsiise%2fSeleccionAdquisiciones%2fSolicitudISSN%2fIndex" target="_blank">SIISE</a>
+        <a href="https://scientificrc.org/index.php/src/login?source=%2Findex.php%2Fsrc%2Fsubmission%2Fwizard" target="_blank">Scientific RC</a>
+        <a href="https://www.openaire.eu/annual-reports" target="_blank">OpenAIRE</a>
+        <a href="https://zenodo.org/" target="_blank">Zenodo</a>
+        <a href="https://sso.anii.org.uy/oxauth/login.htm" target="_blank">ANII</a>
+        <a href="https://rizoma.conahcyt.mx/acerca-de-mi/mi-perfil" target="_blank">Rizoma CONAHCYT</a>
+        <a href="https://papersubmission.scirp.org/paper/showAddPaper" target="_blank">SCIRP Submission</a>
+        <a href="https://utolima.academia.edu/YOBANAOROZCOBENAVIDES" target="_blank">Academia.edu</a>
+        <a href="https://www.studocu.com/co/user/yobana-orozco-benavides/15382735?origin=user-menu" target="_blank">Studocu</a>
+        <a href="https://www.calameo.com/accounts/7997056" target="_blank">Calameo</a>
+        <a href="https://www.amazon.com.mx/stores/YOBANA-OROZCO-BENAVIDES/author/B0CZG5RS1T?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true" target="_blank">Amazon</a>
+      </div>
     </div>
   </footer>
 
@@ -626,6 +622,19 @@
         ageButtons: {
           children: "Niños 👧🧒",
           teens: "Jóvenes 👨‍🎓👩‍🎓"
+        },
+        footer: {
+          copyright: "© 2024-2025 — Herramientas del Proyecto de Investigación: ",
+          projectTitle: "*Emociones en el Aula*",
+          authorInfo: "Propuesta educativa y cultural creada por ",
+          authorName: "Yobana Orozco Benavides",
+          authorRoles: "Escritora | Docente | Gestora de proyectos artísticos y pedagógicos",
+          license: "Licencia: ",
+          licenseType: "Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)",
+          licenseTerms: "Uso libre con fines educativos — ",
+          commercialUse: "prohibido uso comercial",
+          moreInfo: "Más información de la autora: ",
+          authorLink: "yobanaorozcoartista.bio.link"
         }
       },
       en: {
@@ -689,10 +698,23 @@
         ageButtons: {
           children: "Children 👧🧒",
           teens: "Teens 👨‍🎓👩‍🎓"
+        },
+        footer: {
+          copyright: "© 2024-2025 — Research Project Tools: ",
+          projectTitle: "*Emotions in the Classroom*",
+          authorInfo: "Educational and cultural proposal created by ",
+          authorName: "Yobana Orozco Benavides",
+          authorRoles: "Writer | Teacher | Artistic and pedagogical project manager",
+          license: "License: ",
+          licenseType: "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)",
+          licenseTerms: "Free use for educational purposes — ",
+          commercialUse: "commercial use prohibited",
+          moreInfo: "More information about the author: ",
+          authorLink: "yobanaorozcoartista.bio.link"
         }
       },
       fr: {
-        title: "Carte Conceptuelle Interactive ",
+        title: "Carte Conceptuelle Interactive",
         children: {
           instructions: "✨ Faites glisser les concepts sur la carte et organisez-les comme vous le souhaitez. Vous pouvez tout déplacer librement. ✨",
           conceptsTitle: "🔍 Concepts de Risque",
@@ -744,7 +766,7 @@
             academic: ["Abandon scolaire", "Faible performance", "Manque de motivation"]
           },
           feedback: {
-            success: "Excellent! Vous avez correctement organisé los riesgos.",
+            success: "Excellent! Vous avez correctement organisé les risques.",
             incomplete: "Il manque quelques concepts sur la carte.",
             wrong: "Certains concepts sont dans la mauvaise catégorie."
           }
@@ -752,6 +774,19 @@
         ageButtons: {
           children: "Enfants 👧🧒",
           teens: "Adolescents 👨‍🎓👩‍🎓"
+        },
+        footer: {
+          copyright: "© 2024-2025 — Outils du Projet de Recherche: ",
+          projectTitle: "*Émotions en Classe*",
+          authorInfo: "Proposition éducative et culturelle créée par ",
+          authorName: "Yobana Orozco Benavides",
+          authorRoles: "Écrivaine | Enseignante | Gestionnaire de projets artistiques et pédagogiques",
+          license: "Licence: ",
+          licenseType: "Creative Commons Attribution - NonCommercial 4.0 International (CC BY-NC 4.0)",
+          licenseTerms: "Usage libre à des fins éducatives — ",
+          commercialUse: "usage commercial interdit",
+          moreInfo: "Plus d'informations sur l'auteure: ",
+          authorLink: "yobanaorozcoartista.bio.link"
         }
       }
     };
@@ -762,7 +797,7 @@
     let connections = { children: [], teens: [] };
     let currentScale = 1;
     
-    // Cambiar idioma
+    // Función para cambiar el idioma
     function changeLanguage(lang) {
       currentLanguage = lang;
       const texts = translations[lang];
@@ -770,36 +805,95 @@
       // Actualizar botones de idioma
       document.querySelectorAll('.language-btn').forEach(btn => {
         btn.classList.remove('active');
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active');
+        }
       });
-      event.target.classList.add('active');
       
-      // Actualizar textos generales
+      // Actualizar título principal
       document.getElementById('main-title').textContent = texts.title;
+      
+      // Actualizar botones de grupo de edad
       document.getElementById('btn-children').textContent = texts.ageButtons.children;
       document.getElementById('btn-teens').textContent = texts.ageButtons.teens;
       
-      // Actualizar sección de niños
-      updateSectionTexts('children', texts.children);
+      // Actualizar ambas secciones
+      updateAgeSection('children', texts.children);
+      updateAgeSection('teens', texts.teens);
       
-      // Actualizar sección de jóvenes
-      updateSectionTexts('teens', texts.teens);
+      // Actualizar footer
+      updateFooter(texts.footer);
       
-      // Reorganizar conceptos aleatoriamente
+      // Reorganizar conceptos
       shuffleConcepts();
+      
+      // Actualizar conexiones
+      updateConnections(currentAgeGroup);
     }
     
-    function updateSectionTexts(section, texts) {
-      document.getElementById(`${section}-instructions`).textContent = texts.instructions;
-      document.getElementById(`${section}-concepts-title`).textContent = texts.conceptsTitle;
-      document.getElementById(`${section}-reset-btn`).textContent = texts.resetBtn;
-      document.getElementById(`${section}-check-btn`).textContent = texts.checkBtn;
-      document.querySelector(`#${section}-map .node.main`).textContent = texts.mainNode;
+    // Función para actualizar secciones de edad
+    function updateAgeSection(ageGroup, texts) {
+      // Actualizar instrucciones
+      document.getElementById(`${ageGroup}-instructions`).textContent = texts.instructions;
+      
+      // Actualizar título de conceptos
+      document.getElementById(`${ageGroup}-concepts-title`).textContent = texts.conceptsTitle;
+      
+      // Actualizar botones
+      document.getElementById(`${ageGroup}-reset-btn`).textContent = texts.resetBtn;
+      document.getElementById(`${ageGroup}-check-btn`).textContent = texts.checkBtn;
+      document.getElementById(`${ageGroup === 'children' ? 'print-btn' : 'print-btn-teens'}`).textContent = texts.printBtn;
+      
+      // Actualizar nodo principal
+      const mainNode = document.querySelector(`#${ageGroup}-map .node.main`);
+      if (mainNode) mainNode.textContent = texts.mainNode;
       
       // Actualizar categorías
       for (const [category, title] of Object.entries(texts.categories)) {
-        const element = document.getElementById(`${section}-${category}-node`);
-        if (element) element.textContent = title;
+        const categoryNode = document.getElementById(`${ageGroup}-${category}-node`);
+        if (categoryNode) categoryNode.textContent = title;
       }
+    }
+    
+    function updateFooter(footerTexts) {
+      const footer = document.getElementById('footer-content');
+      footer.innerHTML = `
+        <div id="copyright">${footerTexts.copyright}<strong>${footerTexts.projectTitle}</strong></div>
+        <div id="author-info">${footerTexts.authorInfo}<strong>${footerTexts.authorName}</strong>, ${footerTexts.authorRoles}</div>
+        <div id="license-info">
+          ${footerTexts.license} 
+          <em>${footerTexts.licenseType}</em>
+          <span class="cc-logo">
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">
+              <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC Logo">
+            </a>
+          </span>
+        </div>
+        <div id="license-terms">${footerTexts.licenseTerms}<strong>${footerTexts.commercialUse}</strong></div>
+        <div id="more-info">${footerTexts.moreInfo} 
+          <a href="https://yobanaorozcoartista.bio.link/" target="_blank" rel="noopener">${footerTexts.authorLink}</a>
+        </div>
+
+        <div class="enlaces-footer" id="footer-links">
+          <a href="https://orcid.org/0009-0002-9253-6429" target="_blank">ORCID</a>
+          <a href="https://www.webofscience.com/wos/?mode=Nextgen&path=%2Fwos%2Fauthor%2Frecord%2FLLM-9647-2024&IsProductCode=Yes&Init=Yes&DestApp=UA&Func=Frame&action=transfer&SrcApp=CR&SID=USW2EC0AFFb0eJYIUmqxKCgZWIVbn" target="_blank">Web of Science</a>
+          <a href="https://account.ncbi.nlm.nih.gov/?back_url=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fmyncbi%2F" target="_blank">NCBI</a>
+          <a href="https://es.slideshare.net/YOBANAOROZCO" target="_blank">SlideShare</a>
+          <a href="https://hq.ssrn.com/login/authentication.cfm?rectype=edit&perinf=y&partid=7786766" target="_blank">SSRN</a>
+          <a href="https://www.researchgate.net/" target="_blank">ResearchGate</a>
+          <a href="https://siise.bibliotecanacional.gov.co/siise/Login?ReturnUrl=%2fsiise%2fSeleccionAdquisiciones%2fSolicitudISSN%2fIndex" target="_blank">SIISE</a>
+          <a href="https://scientificrc.org/index.php/src/login?source=%2Findex.php%2Fsrc%2Fsubmission%2Fwizard" target="_blank">Scientific RC</a>
+          <a href="https://www.openaire.eu/annual-reports" target="_blank">OpenAIRE</a>
+          <a href="https://zenodo.org/" target="_blank">Zenodo</a>
+          <a href="https://sso.anii.org.uy/oxauth/login.htm" target="_blank">ANII</a>
+          <a href="https://rizoma.conahcyt.mx/acerca-de-mi/mi-perfil" target="_blank">Rizoma CONAHCYT</a>
+          <a href="https://papersubmission.scirp.org/paper/showAddPaper" target="_blank">SCIRP Submission</a>
+          <a href="https://utolima.academia.edu/YOBANAOROZCOBENAVIDES" target="_blank">Academia.edu</a>
+          <a href="https://www.studocu.com/co/user/yobana-orozco-benavides/15382735?origin=user-menu" target="_blank">Studocu</a>
+          <a href="https://www.calameo.com/accounts/7997056" target="_blank">Calameo</a>
+          <a href="https://www.amazon.com.mx/stores/YOBANA-OROZCO-BENAVIDES/author/B0CZG5RS1T?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true" target="_blank">Amazon</a>
+        </div>
+      `;
     }
     
     // Mostrar sección por grupo de edad
@@ -880,11 +974,11 @@
     // Configurar eventos de arrastrar y soltar
     function setupDragAndDrop(sectionId) {
       const section = document.querySelector(sectionId);
-      const concepts = section.querySelectorAll('.concept');
+      const pool = section.querySelector('.concept-pool');
       const map = section.querySelector('.concept-map');
       
       // Configurar arrastre para conceptos del pool
-      concepts.forEach(concept => {
+      pool.querySelectorAll('.concept').forEach(concept => {
         concept.addEventListener('dragstart', function(e) {
           draggedConcept = this;
           this.classList.add('dragging');
@@ -928,19 +1022,34 @@
         
         this.appendChild(newNode);
         
-        // Ocultar el concepto del pool (pero no eliminarlo)
-        draggedConcept.style.visibility = 'hidden';
-        draggedConcept = null;
+        // Eliminar el concepto del pool (no solo ocultarlo)
+        draggedConcept.remove();
+        
+        // Reorganizar aleatoriamente los conceptos restantes
+        reorganizePool(pool);
         
         // Actualizar conexiones
         updateConnections(currentAgeGroup);
+        
+        draggedConcept = null;
       });
       
-      // Configurar arrastre para todos los nodos (incluyendo títulos principales y categorías)
-      const nodes = map.querySelectorAll('.node');
-      nodes.forEach(node => {
+      // Configurar arrastre para todos los nodos existentes
+      map.querySelectorAll('.node').forEach(node => {
         setupNodeDragEvents(node);
       });
+    }
+    
+    // Función para reorganizar aleatoriamente los conceptos en el pool
+    function reorganizePool(pool) {
+      const concepts = Array.from(pool.querySelectorAll('.concept'));
+      if (concepts.length === 0) return;
+      
+      // Mezclar los conceptos
+      for (let i = concepts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        pool.insertBefore(concepts[j], concepts[i]);
+      }
     }
     
     function setupNodeDragEvents(node) {
@@ -1049,7 +1158,7 @@
     function resetCurrentMap() {
       const section = document.querySelector(`#${currentAgeGroup}-section`);
       const map = section.querySelector('.concept-map');
-      const concepts = section.querySelectorAll('.concept');
+      const pool = section.querySelector('.concept-pool');
       
       // Eliminar todos los nodos excepto los principales
       map.querySelectorAll('.node[draggable="true"]').forEach(node => {
@@ -1061,15 +1170,10 @@
         line.remove();
       });
       
-      // Mostrar todos los conceptos nuevamente
-      concepts.forEach(concept => {
-        concept.style.visibility = 'visible';
-      });
-      
-      // Reorganizar conceptos aleatoriamente
+      // Volver a cargar todos los conceptos
       shuffleConcepts();
       
-      // Resetear posición de nodos principales y categorías
+      // Restaurar posición de nodos principales y categorías
       const texts = translations[currentLanguage][currentAgeGroup];
       
       if (currentAgeGroup === 'children') {
@@ -1210,11 +1314,37 @@
     
     // Inicializar
     document.addEventListener('DOMContentLoaded', function() {
+      // Configurar eventos de los botones de idioma
+      document.querySelectorAll('.language-btn').forEach(btn => {
+        btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+      });
+      
+      // Configurar eventos de los botones de edad
+      document.querySelectorAll('.age-btn').forEach(btn => {
+        btn.addEventListener('click', () => showAgeSection(btn.dataset.age));
+      });
+      
+      // Configurar eventos de los botones de control
+      document.getElementById('children-reset-btn').addEventListener('click', resetCurrentMap);
+      document.getElementById('children-check-btn').addEventListener('click', checkCurrentMap);
+      document.getElementById('print-btn').addEventListener('click', printMap);
+      document.getElementById('teens-reset-btn').addEventListener('click', resetCurrentMap);
+      document.getElementById('teens-check-btn').addEventListener('click', checkCurrentMap);
+      document.getElementById('print-btn-teens').addEventListener('click', printMap);
+      
+      // Configurar eventos de zoom
+      document.getElementById('zoom-in-btn').addEventListener('click', zoomIn);
+      document.getElementById('zoom-out-btn').addEventListener('click', zoomOut);
+      document.getElementById('reset-zoom-btn').addEventListener('click', resetZoom);
+      
+      // Configurar idioma inicial
+      updateFooter(translations[currentLanguage].footer);
+      
+      // Configurar mapas
       shuffleConcepts();
       setupDragAndDrop('#children-section');
       setupDragAndDrop('#teens-section');
     });
-    
   </script>
 </body>
 </html>
